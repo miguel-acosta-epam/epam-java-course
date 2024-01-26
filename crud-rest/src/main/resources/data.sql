@@ -10,7 +10,8 @@ INSERT INTO expenses (description, amount, date) VALUES
     ('Book purchase', 35.00, '2024-01-28'),
     ('Tech gadgets', 80.00, '2024-01-29');
 
-
+-- admin -> admin123
+-- customer -> customer123
 INSERT INTO app_user (username, password, email, locked, disabled) VALUES
     ('admin', '$2y$10$gjtUC90R5AFl/hr8yNwH0uZ2Ge/Qma8PZ8.63EN7DWZRoLgVY/24y', 'admin@correo.com', 0, 0),
     ('customer', '$2y$10$bN3TZg6tlJa7kZ/GX9/Fd.AGYvlreajQc01dY/3.DFQnYXRtkOe6G', 'customer@correo.com', 0, 0);
