@@ -24,10 +24,10 @@ public class UserEntity {
   @Column(length = 50)
   private String email;
 
-  @Column(nullable = false, columnDefinition = "TINYINT")
+  @Column(nullable = false)
   private Boolean locked;
 
-  @Column(nullable = false, columnDefinition = "TINYINT")
+  @Column(nullable = false)
   private Boolean disabled;
 
   @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
