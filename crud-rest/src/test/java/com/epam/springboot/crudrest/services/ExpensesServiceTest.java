@@ -1,47 +1,50 @@
 package com.epam.springboot.crudrest.services;
 
-import com.epam.springboot.crudrest.data.ExpenseRepository;
 import com.epam.springboot.crudrest.models.ExpenseEntity;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Arrays;
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 public class ExpensesServiceTest {
 
-  @Mock private ExpenseRepository expenseRepository;
-
   @Autowired private ExpenseService expenseService;
 
   @Test
-  public void getAllExpenses() {
-    // Arrange
-    ExpenseEntity expense1 = new ExpenseEntity();
-    expense1.setId(1L);
-    expense1.setDescription("Groceries");
-    // Set other properties
-
-    ExpenseEntity expense2 = new ExpenseEntity();
-    expense2.setId(2L);
-    expense2.setDescription("Dinner with friends");
-    // Set other properties
-
-    List<ExpenseEntity> expenses = Arrays.asList(expense1, expense2);
-
-    // Mocking the repository's findAll() method
-    when(expenseRepository.findAll()).thenReturn(expenses);
-
+  @DisplayName("Should get all expenses from the database")
+  public void shouldGetAllExpensesFromDB() {
     // Act
     List<ExpenseEntity> result = expenseService.getAllExpenses();
 
     // Assert
-    assertEquals(expenses, result);
+    assertEquals(5, result.size());
+  }
+
+  @Test
+  @DisplayName("Should get an expense by ID from the database")
+  public void shouldGetByIdExpensesFromDB() throws Exception {
+    // Act
+    ExpenseEntity result = expenseService.getExpenseById(5L);
+
+    // Assert
+    assertNotNull(result);
+    assertEquals("Coffee with colleagues", result.getDescription());
+  }
+
+  @Test
+  @DisplayName("Should get the total expenses amount")
+  public void shouldGetExpensesTotal() {
+    // Act
+    BigDecimal total = expenseService.getExpensesTotal();
+
+    // Assert
+    assertEquals(BigDecimal.valueOf(225.5).doubleValue(), total.doubleValue());
   }
 }

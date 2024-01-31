@@ -5,6 +5,7 @@ import com.epam.springboot.crudrest.models.ExpenseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -41,5 +42,11 @@ public class ExpenseService {
         expenseOptional.orElseThrow(() -> new Exception("Expense with id:" + id + " not found."));
 
     expenseRepository.delete(expense);
+  }
+
+  public BigDecimal getExpensesTotal() {
+    List<ExpenseEntity> expenses = expenseRepository.findAll();
+
+    return expenses.stream().map(ExpenseEntity::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
   }
 }

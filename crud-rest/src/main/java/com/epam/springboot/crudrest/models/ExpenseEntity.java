@@ -1,6 +1,7 @@
 package com.epam.springboot.crudrest.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import java.util.Date;
 @Table(name = "expenses")
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 public class ExpenseEntity {
 

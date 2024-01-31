@@ -5,6 +5,7 @@ import com.epam.springboot.crudrest.services.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -20,6 +21,11 @@ public class ExpenseController {
   @GetMapping("/{id}")
   public ExpenseEntity getExpenseById(@PathVariable Long id) throws Exception {
     return expenseService.getExpenseById(id);
+  }
+
+  @GetMapping("/total")
+  public BigDecimal getExpensesTotal() {
+    return expenseService.getExpensesTotal();
   }
 
   @PostMapping
