@@ -1,0 +1,32 @@
+logging:
+  level:
+    org.springframework.jdbc.datasource.init.ScriptUtils: debug
+
+# Postgres Database
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/palmetodb
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  kafka:
+    consumer:
+      group-id: tpd-loggers
+      auto-offset-reset: earliest
+    # change this property if you are using your own
+    # Kafka cluster or your Docker IP is different
+    bootstrap-servers: localhost:9092
+
+# Port config
+server:
+  port: 8080
+
+# For Kafka implementation
+tpd:
+  order-topic: orders
+  notification-topic: notifications
