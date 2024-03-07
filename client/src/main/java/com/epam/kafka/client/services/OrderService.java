@@ -10,8 +10,13 @@ import java.util.List;
 @Service
 public class OrderService {
   @Autowired private OrderRepository orderRepository;
+  @Autowired private KafkaService kafkaService;
 
   public List<OrderEntity> getAllOrders() {
     return orderRepository.findAll();
+  }
+
+  public void placeOrder() {
+    kafkaService.sendMessage("Hola mundo!!!");
   }
 }
