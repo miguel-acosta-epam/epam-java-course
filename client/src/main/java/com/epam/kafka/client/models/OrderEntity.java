@@ -2,10 +2,7 @@ package com.epam.kafka.client.models;
 
 import com.epam.kafka.client.enums.OrderStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "app_order")
@@ -13,6 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class OrderEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
