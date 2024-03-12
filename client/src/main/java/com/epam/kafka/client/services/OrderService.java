@@ -1,6 +1,8 @@
 package com.epam.kafka.client.services;
 
+import com.epam.kafka.client.dtos.OrderDTO;
 import com.epam.kafka.client.enums.OrderStatus;
+import com.epam.kafka.client.mappers.OrderMapper;
 import com.epam.kafka.client.models.OrderEntity;
 import com.epam.kafka.client.repository.OrderRepository;
 import org.hibernate.query.Order;
@@ -13,27 +15,18 @@ import java.util.List;
 public class OrderService {
   @Autowired private OrderRepository orderRepository;
   @Autowired private KafkaService kafkaService;
+  @Autowired private OrderMapper orderMapper;
 
   public List<OrderEntity> getAllOrders() {
     return orderRepository.findAll();
   }
 
-  public void placeOrder() {
-    var orders = getAllOrders();
-    OrderEntity order = null;
+  public void placeOrder(OrderDTO orderDTO) {
+    orderDTO.setStatus(OrderStatus.ORDERED);
 
-    if (orders.isEmpty()) {
-      order =
-          OrderEntity.builder()
-              .id(1L)
-              .flavor("Pollo")
-              .quantity(1)
-              .status(OrderStatus.ORDERED)
-              .build();
-    } else {
-      order = orders.get(0);
-    }
+    var orderEntity = orderMapper.mapOrderDTOToEntity(orderDTO);
+    orderRepository.save(orderEntity);
 
-    kafkaService.sendOrderToTopic(order);
+    kafkaService.sendOrderToTopic(orderEntity);
   }
 }

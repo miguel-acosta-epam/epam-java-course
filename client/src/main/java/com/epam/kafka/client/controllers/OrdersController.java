@@ -1,12 +1,10 @@
 package com.epam.kafka.client.controllers;
 
+import com.epam.kafka.client.dtos.OrderDTO;
 import com.epam.kafka.client.models.OrderEntity;
 import com.epam.kafka.client.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,7 +19,7 @@ public class OrdersController {
   }
 
   @PostMapping
-  public void placeOrder() {
-    orderService.placeOrder();
+  public void placeOrder(@RequestBody OrderDTO orderDTO) {
+    orderService.placeOrder(orderDTO);
   }
 }
