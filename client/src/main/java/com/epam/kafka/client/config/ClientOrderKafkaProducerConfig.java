@@ -1,9 +1,8 @@
 package com.epam.kafka.client.config;
 
-import com.epam.kafka.client.models.OrderEntity;
+import com.epam.kafka.client.dtos.OrderDTO;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
-import org.hibernate.query.Order;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class KafkaProducerConfig {
+public class ClientOrderKafkaProducerConfig {
   @Value(value = "${spring.kafka.bootstrap-servers}")
   private String bootstrapAddress;
 
@@ -24,19 +23,19 @@ public class KafkaProducerConfig {
   public Map<String, Object> orderProducerConfigs() {
     Map<String, Object> configProps = new HashMap<>();
     configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
-    configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+    configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
     configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
 
     return configProps;
   }
 
   @Bean
-  public ProducerFactory<String, OrderEntity> producerFactory() {
+  public ProducerFactory<String, OrderDTO> producerFactory() {
     return new DefaultKafkaProducerFactory<>(orderProducerConfigs());
   }
 
   @Bean
-  public KafkaTemplate<String, OrderEntity> kafkaTemplate() {
+  public KafkaTemplate<String, OrderDTO> kafkaTemplate() {
     return new KafkaTemplate<>(producerFactory());
   }
 }

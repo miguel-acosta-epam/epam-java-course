@@ -2,17 +2,16 @@ package com.epam.kafka.client.dtos;
 
 import com.epam.kafka.client.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderDTO {
+  private Long id;
   private String flavor;
   private int quantity;
   private OrderStatus status;
@@ -20,7 +19,9 @@ public class OrderDTO {
   @Override
   public String toString() {
     return "OrderDTO{"
-        + "flavor='"
+        + "id="
+        + id
+        + ", flavor='"
         + flavor
         + '\''
         + ", quantity="

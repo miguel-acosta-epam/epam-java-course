@@ -17,4 +17,13 @@ public class OrderMapper {
         .quantity(orderDTO.getQuantity())
         .build();
   }
+
+  public OrderDTO mapOrderEntityToDTO(OrderEntity orderEntity) {
+    return OrderDTO.builder()
+        .id(orderEntity.getId())
+        .flavor(orderEntity.getFlavor())
+        .quantity(orderEntity.getQuantity())
+        .status(orderEntity.getStatus())
+        .build();
+  }
 }
