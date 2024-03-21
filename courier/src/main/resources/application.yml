@@ -13,7 +13,7 @@ spring:
 
 # Port config
 server:
-  port: 8081
+  port: 8082
 
 # For Kafka implementation
 tpd:

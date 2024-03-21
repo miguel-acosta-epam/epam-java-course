@@ -15,8 +15,28 @@ public class ClientKafkaConsumerService {
   @Autowired OrderService orderService;
 
   @KafkaListener(topics = "notifications", containerFactory = "orderKafkaListenerContainerFactory")
-  public void notificationsListener(OrderDTO orderDTO) throws Exception {
-    log.info("Receiving order on client... " + orderDTO.getId() + " | " + orderDTO.getFlavor() + ", with status: "+orderDTO.getStatus());
+  public void notificationsListener1(OrderDTO orderDTO) throws Exception {
+    handleKafkaListener(orderDTO);
+  }
+
+  @KafkaListener(topics = "notifications", containerFactory = "orderKafkaListenerContainerFactory")
+  public void notificationsListener2(OrderDTO orderDTO) throws Exception {
+    handleKafkaListener(orderDTO);
+  }
+
+  @KafkaListener(topics = "notifications", containerFactory = "orderKafkaListenerContainerFactory")
+  public void notificationsListener3(OrderDTO orderDTO) throws Exception {
+    handleKafkaListener(orderDTO);
+  }
+
+  private void handleKafkaListener(OrderDTO orderDTO) throws Exception {
+    log.info(
+        "Receiving order on client... "
+            + orderDTO.getId()
+            + " | "
+            + orderDTO.getFlavor()
+            + ", with status: "
+            + orderDTO.getStatus());
 
     orderService.updateOrderStatus(orderDTO);
   }

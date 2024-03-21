@@ -29,7 +29,7 @@ public class PalmettoOrderDeserializer implements Deserializer<OrderDTO> {
       return objectMapper.readValue(new String(data, StandardCharsets.UTF_8), OrderDTO.class);
     } catch (Exception e) {
       log.error("Error deserializing", e);
-      throw new SerializationException("Error when deserializing byte[] to MessageDto");
+      throw new SerializationException("Error when deserializing byte[] to OrderDTO");
     }
   }
 

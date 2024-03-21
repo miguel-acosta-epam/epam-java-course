@@ -9,14 +9,29 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PalmettoKafkaConsumerService {
-  private final Logger log = LoggerFactory.getLogger(PalmettoKafkaConsumerService.class.getSimpleName());
+  private final Logger log =
+      LoggerFactory.getLogger(PalmettoKafkaConsumerService.class.getSimpleName());
 
   @Autowired PalmettoService palmettoService;
 
   @KafkaListener(topics = "orders", containerFactory = "orderKafkaListenerContainerFactory")
-  public void orderListener(OrderDTO orderDTO) throws InterruptedException {
+  public void orderListener1(OrderDTO orderDTO) throws InterruptedException {
+    handleKafkaListener(orderDTO);
+  }
+
+  @KafkaListener(topics = "orders", containerFactory = "orderKafkaListenerContainerFactory")
+  public void orderListener2(OrderDTO orderDTO) throws InterruptedException {
+    handleKafkaListener(orderDTO);
+  }
+
+  @KafkaListener(topics = "orders", containerFactory = "orderKafkaListenerContainerFactory")
+  public void orderListener3(OrderDTO orderDTO) throws InterruptedException {
+    handleKafkaListener(orderDTO);
+  }
+
+  private void handleKafkaListener(OrderDTO orderDTO) throws InterruptedException {
     log.info("Receiving order on palmetto... " + orderDTO.getId() + " | " + orderDTO.getFlavor());
 
-    palmettoService.handleOrder(orderDTO);
+    palmettoService.cookOrder(orderDTO);
   }
 }

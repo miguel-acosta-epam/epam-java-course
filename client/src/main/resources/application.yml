@@ -15,9 +15,13 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   kafka:
+    producer:
+      acks: 1
+      retries: 1
     consumer:
       group-id: tpd-loggers
       auto-offset-reset: earliest
+      enable-auto-commit: false
     # change this property if you are using your own
     # Kafka cluster or your Docker IP is different
     bootstrap-servers: localhost:9092

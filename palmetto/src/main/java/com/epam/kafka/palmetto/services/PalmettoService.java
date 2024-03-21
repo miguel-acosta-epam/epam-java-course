@@ -15,11 +15,11 @@ public class PalmettoService {
 
   @Autowired PalmettoKafkaService palmettoKafkaService;
 
-  void handleOrder(OrderDTO order) throws InterruptedException {
+  void cookOrder(OrderDTO order) throws InterruptedException {
     log.info("Cooking order... " + order.getId() + " | flavor: " + order.getFlavor());
 
-    // 2 minutes to cook a pizza
-    // TimeUnit.MINUTES.sleep(2);
+    // 10 minutes to cook a pizza
+    // TimeUnit.MINUTES.sleep(10);
 
     TimeUnit.SECONDS.sleep(30);
 

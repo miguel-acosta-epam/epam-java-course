@@ -1,6 +1,6 @@
-package com.epam.kafka.client.config;
+package com.epam.kafka.courier.config;
 
-import com.epam.kafka.client.dtos.OrderDTO;
+import com.epam.kafka.courier.dtos.OrderDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.common.errors.SerializationException;
 import org.apache.kafka.common.serialization.Deserializer;
@@ -10,8 +10,9 @@ import org.slf4j.LoggerFactory;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-public class ClientOrderDeserializer implements Deserializer<OrderDTO> {
-  private final Logger log = LoggerFactory.getLogger(ClientOrderDeserializer.class.getSimpleName());
+public class CourierOrderDeserializer implements Deserializer<OrderDTO> {
+  private final Logger log =
+      LoggerFactory.getLogger(CourierOrderDeserializer.class.getSimpleName());
   private final ObjectMapper objectMapper = new ObjectMapper();
 
   @Override
